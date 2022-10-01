@@ -11,5 +11,17 @@ module.exports = (sequelize, Datatypes) => {
     },
     { underscored: true }
   );
+
+  Hashtag.associate = (db) => {
+    //รับเส้น many To many HastagPost <=> Hashtag
+    Hashtag.belongsToMany(db.HashtagPost, {
+      foreignKey: {
+        name: 'hashtagId',
+        allowNull: false,
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'RESTRICT',
+    });
+  };
   return Hashtag;
 };

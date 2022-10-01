@@ -16,7 +16,21 @@ module.exports = (sequelize, DataTypes) => {
 
   Post.associate = (db) => {
     Post.belongsTo(db.User, {
-      foreignKey: {},
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'RESTRICT',
+    });
+
+    Post.hasMany(db.HashtagPost, {
+      foreginKey: {
+        name: 'postId',
+        allowNull: false,
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'RESTRICT',
     });
   };
 

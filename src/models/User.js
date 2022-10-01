@@ -122,9 +122,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: {
         name: 'userId',
         allowNull: false,
-        onDelete: 'CASCADE',
-        onUpdate: 'RESTRICT',
       },
+      onDelete: 'CASCADE',
+      onUpdate: 'RESTRICT',
     });
   };
   return User;
