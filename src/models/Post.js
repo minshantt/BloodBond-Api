@@ -10,10 +10,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       context: DataTypes.STRING,
       postImgUrl: DataTypes.STRING,
-      tags: DataTypes.STRING,
     },
     { underscored: true }
   );
+
+  Post.associate = (db) => {
+    Post.belongsTo(db.User, {
+      foreignKey: {},
+    });
+  };
 
   return Post;
 };

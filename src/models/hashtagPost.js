@@ -1,3 +1,5 @@
+const User = require('./User');
+
 module.exports = (sequelize, DataTypes) => {
   const HashtagPost = sequelize.define(
     'HashtagPost',
