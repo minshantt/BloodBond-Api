@@ -25,11 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Post.hasMany(db.HashtagPost, {
-      foreginKey: {
+      foreignKey: {
         name: 'postId',
         allowNull: false,
       },
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE', //ต้องอันนี้ถูกไหม
       onUpdate: 'RESTRICT',
     });
   };

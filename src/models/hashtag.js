@@ -14,7 +14,7 @@ module.exports = (sequelize, Datatypes) => {
 
   Hashtag.associate = (db) => {
     //รับเส้น many To many HastagPost <=> Hashtag
-    Hashtag.belongsToMany(db.HashtagPost, {
+    Hashtag.hasMany(db.HashtagPost, {
       foreignKey: {
         name: 'hashtagId',
         allowNull: false,

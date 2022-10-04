@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
-      surName: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -118,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
     { underscored: true }
   );
   User.associate = (db) => {
-    User.hasmany(db.Post, {
+    User.hasMany(db.Post, {
       foreignKey: {
         name: 'userId',
         allowNull: false,
