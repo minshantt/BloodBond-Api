@@ -58,7 +58,7 @@ exports.register = async (req, res, next) => {
     //ใช้ Lib bcrypt js  ในการ Hash Password  และใช้ Jwt  สร้าง Token (npmi bcryptjs jsonwebtoken)
     const hashedPassword = await bcrypt.hash(password, 12); //<< 12 is ???
 
-    //import ข้อมูล User
+    //import ข้อมูล User อ้างอิงจาก Models folders
     const user = await User.create({
       password: hashedPassword,
       firstName,
@@ -79,6 +79,29 @@ exports.register = async (req, res, next) => {
     });
     const token = genToken({ id: user.id });
     res.status(201).json({ token });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    console.log(email);
+    console.log(password);
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    const isCorrect = await bcrypt.compare(password, user.password);
+    // console.log(user);
+    // console.log(isCorrect);
+    if (!isCorrect) {
+      throw new AppError('email or password is Invalid', 400);
+    }
+    const token = genToken({ id: user.id });
+    res.status(200).json({ token });
   } catch (err) {
     next(err);
   }
